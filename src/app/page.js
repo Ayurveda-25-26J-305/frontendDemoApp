@@ -128,6 +128,7 @@ export default function HomePage() {
                   sx={{
                     fontWeight: 700,
                     mb: 2,
+                    color: 'white',
                     fontSize: { xs: '2.5rem', md: '3.5rem' },
                   }}
                 >
