@@ -94,11 +94,30 @@ export default function DietPage() {
 
         <Divider sx={{ mb: 4 }} />
 
+        
         {/* FORM */}
-        <Box component="form" onSubmit={handleSubmit}>
+<Box component="form" onSubmit={handleSubmit}>
+  <Grid container spacing={4}>
+
+    {/* Personal Details */}
+    <Grid item xs={12}>
+      <Card elevation={6} sx={{ borderRadius: 3, backgroundColor: '#e8f5e9', '&:hover': { boxShadow: 10 } }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            🧍 Personal Details
+          </Typography>
+
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
-              <TextField select fullWidth name="ageCategory" label="Age Category" onChange={handleChange} required>
+              <TextField
+                select
+                fullWidth
+                name="ageCategory"
+                label="Age"
+                helperText="Enter Age Category"
+                onChange={handleChange}
+                required
+              >
                 <MenuItem value="child">Child</MenuItem>
                 <MenuItem value="adult">Adult</MenuItem>
                 <MenuItem value="senior">Senior</MenuItem>
@@ -106,26 +125,64 @@ export default function DietPage() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField select fullWidth name="gender" label="Gender" onChange={handleChange} required>
+              <TextField
+                select
+                fullWidth
+                name="gender"
+                label="Gender"
+                helperText="Enter Gender"
+                onChange={handleChange}
+                required
+              >
                 <MenuItem value="male">Male</MenuItem>
                 <MenuItem value="female">Female</MenuItem>
               </TextField>
             </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </Grid>
 
-            <Grid item xs={12}>
+    {/* Health Information */}
+    <Grid item xs={12}>
+      <Card elevation={6} sx={{ borderRadius: 3, backgroundColor: '#e3f2fd', '&:hover': { boxShadow: 10 } }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            🩺 Health Information
+          </Typography>
+
+          <TextField
+            fullWidth
+            name="disease"
+            label="Disease"
+            placeholder="e.g. Diabetes"
+            helperText="Used to personalize Ayurvedic recommendations"
+            onChange={handleChange}
+            required
+          />
+        </CardContent>
+      </Card>
+    </Grid>
+
+    {/* Diet Preferences */}
+    <Grid item xs={12}>
+      <Card elevation={6} sx={{ borderRadius: 3, backgroundColor: '#fff3e0', '&:hover': { boxShadow: 10 } }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            🍽️ Diet Preferences
+          </Typography>
+
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
+                select
                 fullWidth
-                name="disease"
-                label="Disease"
-                placeholder="e.g. Diabetes"
-                helperText="Used to personalize Ayurvedic recommendations"
+                name="mealCategory"
+                label="Meal"
+                helperText="Enter Meal"
                 onChange={handleChange}
                 required
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <TextField select fullWidth name="mealCategory" label="Meal Category" onChange={handleChange} required>
+              >
                 <MenuItem value="breakfast">Breakfast</MenuItem>
                 <MenuItem value="lunch">Lunch</MenuItem>
                 <MenuItem value="dinner">Dinner</MenuItem>
@@ -133,7 +190,15 @@ export default function DietPage() {
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <TextField select fullWidth name="foodPreference" label="Food Preference" onChange={handleChange} required>
+              <TextField
+                select
+                fullWidth
+                name="foodPreference"
+                label="Food Preference"
+                helperText="Enter Preference"
+                onChange={handleChange}
+                required
+              >
                 <MenuItem value="veg">Vegetarian</MenuItem>
                 <MenuItem value="non-veg">Non-Vegetarian</MenuItem>
                 <MenuItem value="mixed">Mixed</MenuItem>
@@ -141,27 +206,46 @@ export default function DietPage() {
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <TextField select fullWidth name="activityLevel" label="Activity Level" onChange={handleChange} required>
+              <TextField
+                select
+                fullWidth
+                name="activityLevel"
+                label="Activity"
+                helperText="Enter Level"
+                onChange={handleChange}
+                required
+              >
                 <MenuItem value="light">Light</MenuItem>
                 <MenuItem value="moderate">Moderate</MenuItem>
                 <MenuItem value="high">High</MenuItem>
               </TextField>
             </Grid>
-
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                fullWidth
-                startIcon={<Insights />}
-                sx={{ py: 1.5, borderRadius: 3 }}
-              >
-                Generate Meal Plan
-              </Button>
-            </Grid>
           </Grid>
-        </Box>
+        </CardContent>
+      </Card>
+    </Grid>
+
+    {/* Submit */}
+    <Grid item xs={12}>
+      <Button
+        type="submit"
+        variant="contained"
+        size="large"
+        fullWidth
+        startIcon={<Insights />}
+        sx={{
+          py: 1.6,
+          borderRadius: 3,
+          fontSize: '1.05rem'
+        }}
+      >
+        Generate Meal Plan
+      </Button>
+    </Grid>
+
+  </Grid>
+</Box>
+
 
         {/* RESULTS */}
         {result && (
@@ -248,6 +332,24 @@ export default function DietPage() {
                     ))}
                   </CardContent>
                 </Card>
+              </Grid>
+
+                  {/* Submit */}
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  startIcon={<Insights />}
+                  sx={{
+                    py: 1.6,
+                    borderRadius: 3,
+                    fontSize: '1.05rem'
+                  }}
+                >
+                  Generate Monthly Report
+                </Button>
               </Grid>
             </Grid>
           </Box>
