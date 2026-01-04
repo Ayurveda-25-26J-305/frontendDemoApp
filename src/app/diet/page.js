@@ -14,9 +14,19 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  Card,
+  CardContent,
+  Chip,
+  Divider
 } from '@mui/material';
-import { Restaurant } from '@mui/icons-material';
+import {
+  Restaurant,
+  LocalDining,
+  Favorite,
+  Spa,
+  Insights
+} from '@mui/icons-material';
 
 export default function DietPage() {
   const [formData, setFormData] = useState({
@@ -67,19 +77,25 @@ export default function DietPage() {
 
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Paper sx={{ p: 4, textAlign: 'center' }}>
-        <Restaurant sx={{ fontSize: 90, color: 'primary.main', mb: 2 }} />
+      <Paper elevation={6} sx={{ p: 5, borderRadius: 4 }}>
+        {/* HEADER */}
+        <Box textAlign="center" mb={4}>
+          <Restaurant sx={{ fontSize: 90, color: 'primary.main' }} />
+          <Typography variant="h3" gutterBottom>
+            Personalized Ayurvedic Meal Planner
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            AI-assisted dietary guidance based on Ayurvedic principles
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            Developed by Dias W A N M (IT22899910)
+          </Typography>
+        </Box>
 
-        <Typography variant="h3" gutterBottom>
-          Personalized Ayurvedic Meal Planner
-        </Typography>
-
-        <Typography variant="h6" color="text.secondary" paragraph>
-          Developed by Dias W A N M (IT22899910)
-        </Typography>
+        <Divider sx={{ mb: 4 }} />
 
         {/* FORM */}
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
+        <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField select fullWidth name="ageCategory" label="Age Category" onChange={handleChange} required>
@@ -102,6 +118,7 @@ export default function DietPage() {
                 name="disease"
                 label="Disease"
                 placeholder="e.g. Diabetes"
+                helperText="Used to personalize Ayurvedic recommendations"
                 onChange={handleChange}
                 required
               />
@@ -132,7 +149,14 @@ export default function DietPage() {
             </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" size="large" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                size="large"
+                fullWidth
+                startIcon={<Insights />}
+                sx={{ py: 1.5, borderRadius: 3 }}
+              >
                 Generate Meal Plan
               </Button>
             </Grid>
@@ -141,62 +165,91 @@ export default function DietPage() {
 
         {/* RESULTS */}
         {result && (
-          <Box sx={{ mt: 6, textAlign: 'left' }}>
-            <Typography variant="h5" gutterBottom>
-              Dominant Dosha: <strong>{result.dosha}</strong>
+          <Box mt={6}>
+            <Typography variant="h4" gutterBottom>
+              🌿 Personalized Results
             </Typography>
 
-            <Typography variant="h6" sx={{ mt: 2 }}>
-              Recommended Meal
-            </Typography>
-            <ul>
-              {result.recommendedMeal.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4}>
+                <Card elevation={4}>
+                  <CardContent>
+                    <Spa color="primary" />
+                    <Typography variant="h6">Dominant Dosha</Typography>
+                    <Typography variant="h4" color="primary">
+                      {result.dosha}
+                    </Typography>
+                    <Chip label="AI Verified" color="success" sx={{ mt: 1 }} />
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            <Typography variant="h6" sx={{ mt: 3 }}>
-              Ayurvedic Taste Balance (Shad Rasa)
-            </Typography>
-            <Typography variant="body2" color="text.secondary" gutterBottom>
-              This meal is balanced across all six Ayurvedic tastes
-            </Typography>
+              <Grid item xs={12} md={8}>
+                <Card elevation={4}>
+                  <CardContent>
+                    <LocalDining color="primary" />
+                    <Typography variant="h6" gutterBottom>
+                      Recommended Meal
+                    </Typography>
+                    {result.recommendedMeal.map((item, i) => (
+                      <Chip key={i} label={item} sx={{ mr: 1, mb: 1 }} />
+                    ))}
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
 
-            <Table sx={{ mt: 2 }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell><strong>Taste</strong></TableCell>
-                  <TableCell><strong>Sanskrit</strong></TableCell>
-                  <TableCell><strong>Dishes Contributing</strong></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {result.ayurvedicTastes.map((t, i) => (
-                  <TableRow key={i}>
-                    <TableCell>{t.taste}</TableCell>
-                    <TableCell><em>{t.sanskrit}</em></TableCell>
-                    <TableCell>{t.dishes}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <Card elevation={4} sx={{ mt: 4 }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Ayurvedic Taste Balance (Shad Rasa)
+                </Typography>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell><strong>Taste</strong></TableCell>
+                      <TableCell><strong>Sanskrit</strong></TableCell>
+                      <TableCell><strong>Dishes</strong></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {result.ayurvedicTastes.map((t, i) => (
+                      <TableRow key={i}>
+                        <TableCell>{t.taste}</TableCell>
+                        <TableCell><em>{t.sanskrit}</em></TableCell>
+                        <TableCell>{t.dishes}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
 
-            <Typography variant="h6" sx={{ mt: 3 }}>
-              Nutrient Summary
-            </Typography>
-            <Typography>Calories: {result.nutrients.calories} kcal</Typography>
-            <Typography>Protein: {result.nutrients.protein} g</Typography>
-            <Typography>Carbohydrates: {result.nutrients.carbs} g</Typography>
-            <Typography>Fat: {result.nutrients.fat} g</Typography>
+            <Grid container spacing={3} sx={{ mt: 3 }}>
+              <Grid item xs={12} md={6}>
+                <Card elevation={4}>
+                  <CardContent>
+                    <Typography variant="h6">Nutrient Summary</Typography>
+                    <Typography>Calories: {result.nutrients.calories} kcal</Typography>
+                    <Typography>Protein: {result.nutrients.protein} g</Typography>
+                    <Typography>Carbs: {result.nutrients.carbs} g</Typography>
+                    <Typography>Fat: {result.nutrients.fat} g</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-            <Typography variant="h6" sx={{ mt: 3 }}>
-              Foods to Avoid
-            </Typography>
-            <ul>
-              {result.foodsToAvoid.map((food, i) => (
-                <li key={i}>{food}</li>
-              ))}
-            </ul>
+              <Grid item xs={12} md={6}>
+                <Card elevation={4}>
+                  <CardContent>
+                    <Favorite color="error" />
+                    <Typography variant="h6">Foods to Avoid</Typography>
+                    {result.foodsToAvoid.map((food, i) => (
+                      <Chip key={i} label={food} color="warning" sx={{ mr: 1, mb: 1 }} />
+                    ))}
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
           </Box>
         )}
       </Paper>
