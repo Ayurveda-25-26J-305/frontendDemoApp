@@ -650,7 +650,7 @@ function App() {
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <FormControl component="fieldset">
-                          <FormLabel>Body Build</FormLabel>
+                          <FormLabel><strong>Body Build</strong></FormLabel>
                           <RadioGroup row value={bodyBuild} onChange={(e) => setBodyBuild(e.target.value)}>
                             <FormControlLabel value="Thin/Light" control={<Radio />} label="Thin/Light" />
                             <FormControlLabel value="Medium" control={<Radio />} label="Medium" />
@@ -661,7 +661,7 @@ function App() {
 
                       <Grid item xs={12}>
                         <FormControl component="fieldset">
-                          <FormLabel>Skin Type</FormLabel>
+                          <FormLabel><strong>Skin Type</strong></FormLabel>
                           <RadioGroup row value={skinType} onChange={(e) => setSkinType(e.target.value)}>
                             <FormControlLabel value="Dry/Rough" control={<Radio />} label="Dry/Rough" />
                             <FormControlLabel value="Warm/Oily" control={<Radio />} label="Warm/Oily" />
@@ -672,7 +672,7 @@ function App() {
 
                       <Grid item xs={12}>
                         <FormControl component="fieldset">
-                          <FormLabel>Appetite</FormLabel>
+                          <FormLabel><strong>Appetite</strong></FormLabel>
                           <RadioGroup row value={appetite} onChange={(e) => setAppetite(e.target.value)}>
                             <FormControlLabel value="Irregular" control={<Radio />} label="Irregular" />
                             <FormControlLabel value="Strong" control={<Radio />} label="Strong" />
@@ -683,7 +683,7 @@ function App() {
 
                       <Grid item xs={12}>
                         <FormControl component="fieldset">
-                          <FormLabel>Sleep Pattern</FormLabel>
+                          <FormLabel><strong>Sleep Pattern</strong></FormLabel>
                           <RadioGroup row value={sleepPattern} onChange={(e) => setSleepPattern(e.target.value)}>
                             <FormControlLabel value="Light/Interrupted" control={<Radio />} label="Light" />
                             <FormControlLabel value="Moderate" control={<Radio />} label="Moderate" />
@@ -694,7 +694,7 @@ function App() {
 
                       <Grid item xs={12}>
                         <FormControl component="fieldset">
-                          <FormLabel>Mental Activity</FormLabel>
+                          <FormLabel><strong>Mental Activity</strong></FormLabel>
                           <RadioGroup row value={mentalActivity} onChange={(e) => setMentalActivity(e.target.value)}>
                             <FormControlLabel value="Restless/Active" control={<Radio />} label="Restless" />
                             <FormControlLabel value="Sharp/Focused" control={<Radio />} label="Sharp" />
@@ -705,7 +705,7 @@ function App() {
 
                       <Grid item xs={12}>
                         <FormControl component="fieldset">
-                          <FormLabel>Temperament</FormLabel>
+                          <FormLabel><strong>Temperament</strong></FormLabel>
                           <RadioGroup row value={temperament} onChange={(e) => setTemperament(e.target.value)}>
                             <FormControlLabel value="Anxious/Worried" control={<Radio />} label="Anxious" />
                             <FormControlLabel value="Irritable/Angry" control={<Radio />} label="Irritable" />
@@ -767,6 +767,7 @@ function App() {
                         <FormControl fullWidth>
                           <InputLabel>Primary Symptom</InputLabel>
                           <Select
+                            sx={{ minWidth: 200 }}
                             value={symptom}
                             label="Primary Symptom"
                             onChange={(e) => setSymptom(e.target.value)}
@@ -794,6 +795,7 @@ function App() {
                           Duration: {durationDays} days
                         </Typography>
                         <Slider
+                          sx={{ minWidth: 300 }}
                           value={durationDays}
                           onChange={(e, newValue) => setDurationDays(newValue)}
                           min={1}
@@ -808,17 +810,7 @@ function App() {
                         />
                       </Grid>
 
-                      <Grid item xs={12}>
-                        <TextField
-                          fullWidth
-                          multiline
-                          rows={3}
-                          label="Additional Information (Optional)"
-                          value={additionalInfo}
-                          onChange={(e) => setAdditionalInfo(e.target.value)}
-                          placeholder="Any other symptoms or details..."
-                        />
-                      </Grid>
+                     
 
                       <Grid item xs={12}>
                         <Button
