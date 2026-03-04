@@ -273,7 +273,7 @@ export default function DietPage() {
                   <CardContent>
                     <LocalDining color="primary" />
                     <Typography variant="h6" gutterBottom>
-                      Recommended Meal
+                      RecommendedDDD Meal
                     </Typography>
                     {result.recommendedMeal.map((item, i) => (
                       <Chip key={i} label={item} sx={{ mr: 1, mb: 1 }} />
